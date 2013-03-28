@@ -1,0 +1,23 @@
+< namespace:"flare", name:"Web Camera Filter" >
+
+public texture mainTexture;
+
+input POSITION position;
+input UV0 uv0;
+interpolated float4 iUV;
+
+private float4 vertexFunction()
+{
+    iUV = uv0;
+    return position.xyzw;
+}
+
+private float4 fragmentFunction()
+{
+    return sample(mainTexture, iUV.xy);
+}
+
+technique "main" {
+	vertex vertexFunction();
+	fragment fragmentFunction();
+}

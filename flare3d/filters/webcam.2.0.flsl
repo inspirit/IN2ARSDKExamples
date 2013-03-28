@@ -1,0 +1,18 @@
+
+use namespace flare;
+use namespace flare.filters;
+
+sampler2D texture;
+
+float4 vert()
+{
+	input POSITION position;
+	return position.xyzw;
+}
+
+technique template
+{
+	output vertex = vert();
+	output fragment = textureMap( texture );
+}
+
