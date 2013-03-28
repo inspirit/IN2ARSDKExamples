@@ -8,17 +8,17 @@ package com.in2ar.minko
     import com.in2ar.detect.IN2ARReference;
     
     use namespace minko_math;
-	
-	/**
+    
+    /**
      * @author Eugene Zatepyakin
      */
     public final class MinkoContainer extends Group
     {
         protected var maxDropFrames:int = 2;
         protected var droppedFrames:int = 0;
-		
-		protected var transformRAW:Vector.<Number>;
-		protected var arTransform:Matrix4x4;
+        
+        protected var transformRAW:Vector.<Number>;
+        protected var arTransform:Matrix4x4;
         protected var detected:Boolean = false;
         
         public function MinkoContainer(maxDropFrames:int = 2) 
@@ -65,20 +65,20 @@ package com.in2ar.minko
         }
         
         protected function get3DMatrixLH(data:Vector.<Number>, R:Vector.<Number>, t:Vector.<Number>, mirror:Boolean = false):void
-		{
-			if (!mirror)
-			{
-				data[0] = R[0]; data[1] = -R[3]; data[2] = R[6]; data[3] = 0.0;
-				data[4] = R[1]; data[5] = -R[4]; data[6] = R[7]; data[7] = 0.0;
-				data[8] = -R[2]; data[9] = R[5]; data[10] = -R[8]; data[11] = 0.0;
-				data[12] = t[0]; data[13] = -t[1]; data[14] = t[2]; data[15] = 1.0;
-			} else {
-				data[0] = -R[0]; data[1] = -R[3]; data[2] = R[6]; data[3] = 0.0;
-				data[4] = R[1]; data[5] = R[4]; data[6] = -R[7]; data[7] = 0.0;
-				data[8] = R[2]; data[9] = R[5]; data[10] = -R[8]; data[11] = 0.0;
-				data[12] = -t[0]; data[13] = -t[1]; data[14] = t[2]; data[15] = 1.0;
-			}
-		}
+        {
+            if (!mirror)
+            {
+                data[0] = R[0]; data[1] = -R[3]; data[2] = R[6]; data[3] = 0.0;
+                data[4] = R[1]; data[5] = -R[4]; data[6] = R[7]; data[7] = 0.0;
+                data[8] = -R[2]; data[9] = R[5]; data[10] = -R[8]; data[11] = 0.0;
+                data[12] = t[0]; data[13] = -t[1]; data[14] = t[2]; data[15] = 1.0;
+            } else {
+                data[0] = -R[0]; data[1] = -R[3]; data[2] = R[6]; data[3] = 0.0;
+                data[4] = R[1]; data[5] = R[4]; data[6] = -R[7]; data[7] = 0.0;
+                data[8] = R[2]; data[9] = R[5]; data[10] = -R[8]; data[11] = 0.0;
+                data[12] = -t[0]; data[13] = -t[1]; data[14] = t[2]; data[15] = 1.0;
+            }
+        }
         
         public function toggleVisibility(node:ISceneNode, value:Boolean):void
         {

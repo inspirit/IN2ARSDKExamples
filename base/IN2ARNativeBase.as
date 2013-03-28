@@ -2,10 +2,10 @@ package
 {
     import com.in2ar.ane.IN2ARNative;
     import com.in2ar.IIN2AR;
-	import flash.display.Sprite;
+    import flash.display.Sprite;
     import flash.events.Event;
-	
-	/**
+    
+    /**
      * Base class for IN2AR Native Extension version
      * @author Eugene Zatepyakin
      */

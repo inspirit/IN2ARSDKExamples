@@ -17,8 +17,8 @@ package
     import flash.text.TextField;
     import flash.text.TextFormat;
     import flash.utils.ByteArray;
-	
-	/**
+    
+    /**
      * Basic Flare3D + IN2AR example
      * You can switch base class to compile for FLASH/AIR(ANE)
      * @author Eugene Zatepyakin
@@ -30,23 +30,23 @@ package
         
         // embed your data file here
         [Embed(source="../assets/def_data.ass", mimeType="application/octet-stream")]
-		private static const data_ass:Class;
-		
-		// init asfeat instance and support classes
-		public var intrinsic:IntrinsicParameters;
-		
-		// max transfromation error to accept
-		public var maxTransformError:Number = 10 * 10;
-		
-		// different visual objects
+        private static const data_ass:Class;
+        
+        // init asfeat instance and support classes
+        public var intrinsic:IntrinsicParameters;
+        
+        // max transfromation error to accept
+        public var maxTransformError:Number = 10 * 10;
+        
+        // different visual objects
         private var video:Video;
-		private var cameraBuffer:BitmapData;
-		private var workBuffer:BitmapData;
-		private var cameraMatrix:Matrix;
+        private var cameraBuffer:BitmapData;
+        private var workBuffer:BitmapData;
+        private var cameraMatrix:Matrix;
         public static var text:TextField;
-		
-		// camera and viewport options
-		public var streamW:int = 640;
+        
+        // camera and viewport options
+        public var streamW:int = 640;
         public var streamH:int = 480;
         public var downScaleRatio:Number = 1;
         public var workW:int = streamW * downScaleRatio;
@@ -68,14 +68,14 @@ package
             addEventListener(Event.INIT, initIN2AR);
             
             super();
-		}
+        }
         
         protected function initIN2AR(e:Event = null):void
-		{
+        {
             removeEventListener(Event.INIT, initIN2AR);
             
             // init our engine
-			in2arLib.init( workW, workH, maxPointsToDetect, maxReferenceObjects, maxTransformError, stage );
+            in2arLib.init( workW, workH, maxPointsToDetect, maxReferenceObjects, maxTransformError, stage );
             
             intrinsic = in2arLib.getIntrinsicParams();
             
@@ -86,18 +86,18 @@ package
             
             // but u can switch it off if u want
             in2arLib.setUseLSHDictionary(true);
-			
-			// add reference object
-			in2arLib.addReferenceObject( ByteArray( new data_ass ) );
-			
-			// add event listeners
-			in2arLib.addListener( IN2ARDetectionEvent.DETECTED, onModelDetected );
-			in2arLib.addListener( IN2ARDetectionEvent.FAILED, onDetectionFailed );
-			
-			// ATTENTION 
-			// limit the amount of references to be detected per frame
+            
+            // add reference object
+            in2arLib.addReferenceObject( ByteArray( new data_ass ) );
+            
+            // add event listeners
+            in2arLib.addListener( IN2ARDetectionEvent.DETECTED, onModelDetected );
+            in2arLib.addListener( IN2ARDetectionEvent.FAILED, onDetectionFailed );
+            
+            // ATTENTION 
+            // limit the amount of references to be detected per frame
             // if u have only one reference u can skip this option
-			in2arLib.setMaxReferencesPerFrame(1);
+            in2arLib.setMaxReferencesPerFrame(1);
             
             // setup web camera
             initCamera();            
@@ -118,26 +118,26 @@ package
         protected function onModelDetected(e:IN2ARDetectionEvent):void 
         {
             var refList:Vector.<IN2ARReference> = e.detectedReferences;
-			var ref:IN2ARReference;
-			var n:int = e.detectedReferencesCount;
-			var state:String;
-			
-			for(var i:int = 0; i < n; ++i) {
-				ref = refList[i];
-				state = ref.detectType;
-				
+            var ref:IN2ARReference;
+            var n:int = e.detectedReferencesCount;
+            var state:String;
+            
+            for(var i:int = 0; i < n; ++i) {
+                ref = refList[i];
+                state = ref.detectType;
+                
                 fl3dAxis.in2arTransform(ref, 0.8, mirror);
                 
-				text.text = state;
+                text.text = state;
                 text.appendText( ' @ ' + ref.id );
-				
-				if(state == '_detect')
-					text.appendText( ' :: matched: ' + ref.matchedPointsCount );
-			}
+                
+                if(state == '_detect')
+                    text.appendText( ' :: matched: ' + ref.matchedPointsCount );
+            }
         }
         
         protected function onEnterFrame(e:Event = null):void
-		{
+        {
             // draw video object
             if(cameraBuffer){
                 cameraBuffer.draw(video);
@@ -150,7 +150,7 @@ package
                     in2arLib.detect(cameraBuffer);
                 }
             }
-		}
+        }
         
         protected function initFlare3D():void
         {
@@ -184,31 +184,31 @@ package
             fl3dAxis.visible = false;
             
             // start to update the scene.
-			fl3dScene.addEventListener( Scene3D.UPDATE_EVENT, fl3dUpdateEvent );
+            fl3dScene.addEventListener( Scene3D.UPDATE_EVENT, fl3dUpdateEvent );
             // for some reason flare3d doesnt allow to use custom projection matrix
             // so we need to update it every (!) render event
             fl3dScene.addEventListener( Scene3D.RENDER_EVENT, fl3dRenderEvent );
         }
         
         protected function fl3dRenderEvent(e:Event):void 
-		{
+        {
             fl3dCamera.updateProjection();
             Device3D.proj.copyRawDataFrom( fl3dCamera.projectionRAW );
             Device3D.viewProj.copyRawDataFrom( fl3dCamera.viewProjection.rawData );
         }
         protected function fl3dUpdateEvent(e:Event):void 
-		{
+        {
             // upload web camera image
             fl3dCaptureMesh.invalidate(fl3dScene);
-		}
+        }
         
         protected function initCamera():void
         {
             var camera:flash.media.Camera = flash.media.Camera.getCamera();
-			camera.setMode(streamW, streamH, 30, false);
-			
-			video = new Video(camera.width, camera.height);
-			video.attachCamera(camera);
+            camera.setMode(streamW, streamH, 30, false);
+            
+            video = new Video(camera.width, camera.height);
+            video.attachCamera(camera);
             
             cameraBuffer = new BitmapData(streamW, streamH, true, 0x0);
             workBuffer = new BitmapData(workW, workH, true, 0x0);
@@ -220,20 +220,20 @@ package
         }
         
         protected function initText():void
-		{
-			// DEBUG TEXT FIELD
-			text = new TextField();
-			text.defaultTextFormat = new TextFormat("Verdana", 11, 0xFFFFFF);
+        {
+            // DEBUG TEXT FIELD
+            text = new TextField();
+            text.defaultTextFormat = new TextFormat("Verdana", 11, 0xFFFFFF);
             text.background = true;
             text.backgroundColor = 0x000000;
             text.textColor = 0xFFFFFF;
-			text.width = 640;
-			text.height = 18;
-			text.selectable = false;
-			text.mouseEnabled = false;
+            text.width = 640;
+            text.height = 18;
+            text.selectable = false;
+            text.mouseEnabled = false;
             text.y = stage.stageHeight - text.height;
-			addChild(text);
-		}
+            addChild(text);
+        }
         
     }
 

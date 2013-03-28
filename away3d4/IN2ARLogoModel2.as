@@ -13,8 +13,8 @@ package
     import flash.utils.ByteArray;
 
 
-	
-	/**
+    
+    /**
      * ...
      * @author Eugene Zatepyakin
      */

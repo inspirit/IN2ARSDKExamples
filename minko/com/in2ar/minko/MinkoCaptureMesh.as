@@ -10,8 +10,8 @@ import flash.geom.Matrix;
 import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.utils.ByteArray;
-	
-	/**
+    
+    /**
      * ...
      * @author Eugene Zatepyakin
      */

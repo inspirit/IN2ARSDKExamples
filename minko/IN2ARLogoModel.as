@@ -18,15 +18,15 @@ package
     import flash.display.BitmapData;
     import flash.geom.Vector3D;
     import flash.utils.ByteArray;
-	
-	/**
+    
+    /**
      * ...
      * @author Eugene Zatepyakin
      */
     public final class IN2ARLogoModel extends Mesh 
     {
         [Embed(source="../assets/in2ar_logo/paint_noise.png")] private static var Charmap:Class;
-		[Embed(source = "../assets/in2ar_logo/logo_bouquet.obj", mimeType = "application/octet-stream")] private static var Charmesh:Class;
+        [Embed(source = "../assets/in2ar_logo/logo_bouquet.obj", mimeType = "application/octet-stream")] private static var Charmesh:Class;
         
         protected var _lightTexture:MinkoCaptureTexture;
         protected var _texture:TextureResource;
@@ -75,7 +75,7 @@ package
             //surfNormal.x = dt[2];
             //surfNormal.y = dt[6];
             //surfNormal.z = dt[10];
-			
+            
             _surfNormal4.x = 0;
             _surfNormal4.y = 0;
             _surfNormal4.z = -1;
@@ -94,9 +94,9 @@ package
         {
             var parser:OBJParser = new OBJParser(12);
             var obj_ba:ByteArray = ByteArray(new Charmesh);
-			var str:String = obj_ba.toString();
+            var str:String = obj_ba.toString();
             parser.parse(str);
-			obj_ba.clear();
+            obj_ba.clear();
             
             // construct format
             var verts:Vector.<Number> = parser.vertices;
@@ -110,11 +110,11 @@ package
                 xyz_uv.push(verts[j], verts[(j + 1) | 0], verts[(j + 2) | 0], uvs[i << 1], uvs[((i << 1) + 1) | 0]);
                 j += 3;
             }
-			
-			return new Geometry(
-				new <IVertexStream>[VertexStream.fromVector(StreamUsage.READ, VertexFormat.XYZ_UV, xyz_uv)],
+            
+            return new Geometry(
+                new <IVertexStream>[VertexStream.fromVector(StreamUsage.READ, VertexFormat.XYZ_UV, xyz_uv)],
                 IndexStream.fromVector(StreamUsage.READ, parser.indices)
-			);
+            );
         }
         
     }

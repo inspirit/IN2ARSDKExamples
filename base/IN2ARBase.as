@@ -2,7 +2,7 @@ package
 {
     import com.in2ar.IIN2AR;
     import com.in2ar.IN2AR;
-	import flash.display.Sprite;
+    import flash.display.Sprite;
     import flash.events.Event;
     import flash.system.LoaderContext;
 
@@ -18,7 +18,7 @@ package
         public function IN2ARBase() 
         {
             if(stage) onAddedToStage();
-			else addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+            else addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
         }
         
         protected function onAddedToStage(e:Event = null):void

@@ -1,7 +1,7 @@
 package com.in2ar.flare3d 
 {
     import flare.basic.Scene3D;
-	import flare.core.Mesh3D;
+    import flare.core.Mesh3D;
     import flare.core.Surface3D;
     import flare.materials.filters.TextureFilter;
     import flare.materials.flsl.FLSLCompiler;
@@ -12,8 +12,8 @@ package com.in2ar.flare3d
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.utils.ByteArray;
-	
-	/**
+    
+    /**
      * @author Eugene Zatepyakin
      */
     public final class Flare3DCaptureMesh extends Mesh3D 
@@ -24,7 +24,7 @@ package com.in2ar.flare3d
         public static const FILL_MODE_NO_STRETCH:uint = 3;
         
         [Embed(source = '../../../filters/webcam.flsl', mimeType = 'application/octet-stream')]
-		private static var FilterSource:Class;
+        private static var FilterSource:Class;
         private static var webcamFilterBytes:ByteArray = FLSLCompiler.compile( new FilterSource );
         
         protected var _viewWidth:int;
@@ -47,8 +47,8 @@ package com.in2ar.flare3d
             super(name);
             
             surfaces[0] = _surface = new Surface3D();
-			_surface.addVertexData( Surface3D.POSITION, 3 );
-			_surface.addVertexData( Surface3D.UV0, 2 );
+            _surface.addVertexData( Surface3D.POSITION, 3 );
+            _surface.addVertexData( Surface3D.UV0, 2 );
             
             _viewWidth = viewWidth;
             _viewHeight = viewHeight;
@@ -139,13 +139,13 @@ package com.in2ar.flare3d
                     break;
             }
             _uv.x = u; _uv.y = v;
-            _surface.vertexVector.push(	-widthScaling, -heightScaling,0,  u,    1-v,
+            _surface.vertexVector.push( -widthScaling, -heightScaling,0,  u,    1-v,
                                              widthScaling, -heightScaling,0,  1-u,  1-v,
                                             -widthScaling, heightScaling,0,   u,    v,
                                              widthScaling, heightScaling,0,   1-u,  v );
                                              
             _surface.indexVector.push( 0, 1, 2, 
-									        1, 3, 2 );
+                                            1, 3, 2 );
                                             
             //
             

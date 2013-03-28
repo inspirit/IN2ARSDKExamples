@@ -24,7 +24,7 @@ package
     import flash.text.TextFormat;
     import flash.utils.ByteArray;
     
-	/**
+    /**
      * This demo shows how to use FP 11.4 and above Camera features
      * You can switch base class to compile for FLASH/AIR(ANE)
      * @author Eugene Zatepyakin

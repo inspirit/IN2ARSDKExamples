@@ -9,8 +9,8 @@ package com.in2ar.minko
     import aerys.minko.render.geometry.stream.VertexStream;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-	
-	/**
+    
+    /**
      * @author Eugene Zatepyakin
      */
     public final class MinkoCaptureGeometry extends Geometry 
@@ -30,7 +30,7 @@ package com.in2ar.minko
                                                 fillMode:uint = FILL_MODE_PRESERVE_ASPECT_RATIO_AND_FILL) 
         {
             var vertices:Vector.<Number>;
-			var indices:Vector.<uint> = Vector.<uint>([0,1,2,1,3,2]);
+            var indices:Vector.<uint> = Vector.<uint>([0,1,2,1,3,2]);
             
             var u:Number, v:Number;
             var renderToTextureRect:Rectangle = new Rectangle();
@@ -91,15 +91,15 @@ package com.in2ar.minko
             }
             
             _uv.x = u; _uv.y = v;
-            vertices = Vector.<Number>([	-widthScaling, -heightScaling,0,   u, 1-v,
+            vertices = Vector.<Number>([    -widthScaling, -heightScaling,0,   u, 1-v,
                                              widthScaling, -heightScaling,0,   1-u, 1-v,
                                             -widthScaling,  heightScaling,0,   u,   v,
                                              widthScaling,  heightScaling,0,   1-u,   v ]);
-			
-			super(
-				new <IVertexStream>[VertexStream.fromVector(StreamUsage.DYNAMIC, VertexFormat.XYZ_UV, vertices)],
-				IndexStream.fromVector(StreamUsage.STATIC, indices)
-			);
+            
+            super(
+                new <IVertexStream>[VertexStream.fromVector(StreamUsage.DYNAMIC, VertexFormat.XYZ_UV, vertices)],
+                IndexStream.fromVector(StreamUsage.STATIC, indices)
+            );
         }
         
         public function get mirror():Boolean
